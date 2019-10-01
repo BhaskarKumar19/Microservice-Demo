@@ -3,7 +3,7 @@
 Swagger Configuration:
 
 Dependency:
-
+```
 <dependency>
     <groupId>io.springfox</groupId>
     <artifactId>springfox-swagger2</artifactId>
@@ -32,7 +32,7 @@ public class SwaggerConfig {
           .build();                                           
     }
 }
-
+```
 
 
 Exposes swagger documentation on:(API returns Json string)
