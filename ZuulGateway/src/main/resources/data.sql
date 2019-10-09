@@ -1,3 +1,0 @@
-insert into  hmsidb.product_catalog(id, category,description,image_url,name) values(101, 'motorcycle','Hornet', 'https://imgd.aeplcdn.com/1280x720/bw/models/honda-hornet.jpg?20190103151915&q=80', 'Hornet');
-insert into  hmsidb.product_catalog(id, category,description,image_url,name) values(102, 'scooter','Activa', 'https://4.imimg.com/data4/XG/BL/MY-4954/honda-activa-i-scooters-500x500.png', 'Activa');
-insert into  hmsidb.product_catalog(id, category,description,image_url,name) values(103, 'superBikes','CBR650R', 'https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjbp4bM8_zhAhUsmeAKHRCkCLcQjRx6BAgBEAU&url=https%3A%2F%2Fwww.zigwheels.com%2Fnewbikes%2FHonda%2FCBR650F&psig=AOvVaw2RJhYIPm5PhfeJ0DTWY30S&ust=1556888454190167', 'CBR650R');

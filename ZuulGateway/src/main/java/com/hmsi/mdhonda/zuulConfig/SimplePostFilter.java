@@ -34,7 +34,7 @@ public class SimplePostFilter extends ZuulFilter {
 		RequestContext ctx = RequestContext.getCurrentContext();
 		HttpServletResponse resp = ctx.getResponse();
 		resp.addHeader("X-Sample", UUID.randomUUID().toString());
-		log.info(String.format("%s resp code with header to %s", ctx.getResponse().getStatus(), "X-Sample"));
+		log.info(String.format("%s resp code", ctx.getResponse().getStatus()));
 
 		return null;
 	}
