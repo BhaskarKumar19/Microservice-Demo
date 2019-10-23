@@ -1,44 +1,39 @@
-# Microservice-Demo
+# Demonstrate rest-template with client slide load balancing
 
-Swagger Configuration:
+We are using rest-template for inter-microservice call. Quote service is calling catalog-service while adding quotes. 
 
-Dependency:
+Inject the bean in QuoteServiceApplication
+
 ```
-<dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-swagger2</artifactId>
-    <version>2.9.2</version>
-</dependency>
-
-To use Swagger UI, one additional Maven dependency is required:
-
-dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-swagger-ui</artifactId>
-    <version>2.9.2</version>
-</dependency>
-
-The configuration of Swagger mainly centers around the Docket bean.
-
-@Configuration
-@EnableSwagger2
-public class SwaggerConfig {                                    
-    @Bean
-    public Docket api() { 
-        return new Docket(DocumentationType.SWAGGER_2)  
-          .select()                                  
-          .apis(RequestHandlerSelectors.any())              
-          .paths(PathSelectors.any())                          
-          .build();                                           
-    }
+@Bean
+@LoadBalanced
+RestTemplate restTemplate() {
+	return new RestTemplate();
 }
 ```
 
+Calling service using rest-template.
 
-Exposes swagger documentation on:(API returns Json string)
-http://localhost:8991/v2/api-docs
+```
+ResponseEntity<List<CatalogDto>> response = restTemplate.exchange(
+				  "http://CATALOG-SERVICE/catalog-api/catalogs",
+				  HttpMethod.GET,
+				  null,
+				  new ParameterizedTypeReference<List<CatalogDto>>(){});
 
-Exposes swagger UI on:
-http://localhost:8991/swagger-ui.html
+```
+
+## Client side vs server side load balancing:
+1. Server side load balancing is distributing the incoming requests towards multiple instances of the service.
+2. Client side load balancing is distributing the outgoing request from the client itself.
+
+- Spring RestTemplate can be used for client side load balancing.
+- Spring Netflix Eureka has a built-in client side load balancer called Ribbon.
+- Ribbon can automatically be configured by registering RestTemplate as a bean and annotating it with **@LoadBalanced**.
+- **@LoadBalanced**  - when added to rest template, we can access a service by its name, otherwise the hostname and port is required to call the service.
+
+
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------
+

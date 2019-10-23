@@ -1,25 +1,14 @@
 package com.hmsi.mdhonda.quoteService.dto;
 
-import com.hmsi.mdhonda.quoteService.entities.Customer;
-import com.hmsi.mdhonda.quoteService.entities.Vehicle;
-
 public class QuoteDto {
 	int id;
-	Vehicle vehicle;
-	Customer customer;
+	CatalogDto catalog;
+	CustomerDto customer;
 	String comment;
 
 	public QuoteDto() {
 	}
 	
-	public QuoteDto(int id, Vehicle vehicle, Customer customer, String comment) {
-		super();
-		this.id = id;
-		this.vehicle = vehicle;
-		this.customer = customer;
-		this.comment = comment;
-	}
-
 	public int getId() {
 		return id;
 	}
@@ -28,19 +17,11 @@ public class QuoteDto {
 		this.id = id;
 	}
 
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
-
-	public Customer getCustomer() {
+	public CustomerDto getCustomer() {
 		return customer;
 	}
 
-	public void setCustomer(Customer customer) {
+	public void setCustomer(CustomerDto customer) {
 		this.customer = customer;
 	}
 
@@ -51,5 +32,15 @@ public class QuoteDto {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public CatalogDto getCatalog() {
+		return catalog;
+	}
+
+	public void setCatalog(CatalogDto catalog) {
+		this.catalog = catalog;
+	}
+
+	
 
 }
