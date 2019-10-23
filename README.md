@@ -2,7 +2,7 @@
 
 We are using rest-template for inter-microservice call. Quote service is calling catalog-service while adding quotes. 
 
-Inject the bean QuoteServiceApplication
+Inject the bean in QuoteServiceApplication
 
 ```
 @Bean
