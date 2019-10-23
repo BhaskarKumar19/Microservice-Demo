@@ -6,16 +6,17 @@ Inject the bean QuoteServiceApplication
 
 ```
 @Bean
-	@LoadBalanced
-	RestTemplate restTemplate() {
-		return new RestTemplate();
-	}
+@LoadBalanced
+RestTemplate restTemplate() {
+	return new RestTemplate();
+}
 ```
 
 Calling service using rest-template.
 
 ```
-ResponseEntity<List<CatalogDto>> response = restTemplate.exchange("http://CATALOG-SERVICE/catalog-api/catalogs",
+ResponseEntity<List<CatalogDto>> response = restTemplate.exchange(
+				  "http://CATALOG-SERVICE/catalog-api/catalogs",
 				  HttpMethod.GET,
 				  null,
 				  new ParameterizedTypeReference<List<CatalogDto>>(){});
