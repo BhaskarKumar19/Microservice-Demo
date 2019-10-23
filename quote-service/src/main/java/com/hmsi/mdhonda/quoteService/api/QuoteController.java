@@ -24,7 +24,7 @@ public class QuoteController {
 	private QuoteService quoteService;
 	
 	@GetMapping(path="/quotes", produces= MediaType.APPLICATION_JSON_VALUE)
-	public List<QuoteDto> getCatalogs() {
+	public List<QuoteDto> getQuotes() {
 		return quoteService.getAllQuotes();
 	}
 	
@@ -34,7 +34,7 @@ public class QuoteController {
 	}
 	
 	@DeleteMapping(path="/quotes", produces= MediaType.APPLICATION_JSON_VALUE)
-	public List<QuoteDto> deleteCatalogs(@RequestBody List<QuoteDto> catalogs) {
+	public List<QuoteDto> deleteQuotes(@RequestBody List<QuoteDto> catalogs) {
 		return null;//quoteService.deleteCatalogs(catalogs);
 	}
 	

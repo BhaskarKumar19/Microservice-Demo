@@ -6,8 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.data.annotation.ReadOnlyProperty;
 
 @Entity
 @Table(name = "Quote_Detail")
@@ -16,8 +19,10 @@ public class Quote {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	int id;
 	
-	@OneToOne(cascade = {CascadeType.ALL})
-	Vehicle vehicle;
+	
+	@OneToOne
+	@JoinColumn(name="product_catalog_id", updatable=false, insertable=false)
+	ProductCatalog catalog;
 
 	@OneToOne(cascade = {CascadeType.ALL})
 	Customer customer;
@@ -27,16 +32,6 @@ public class Quote {
 	
 	public Quote() {}
 
-	public Quote(int id, Vehicle vehicle, Customer customer, String comment) {
-		super();
-		this.id = id;
-		this.vehicle = vehicle;
-		this.customer = customer;
-		this.comment = comment;
-	}
-
-
-
 	public int getId() {
 		return id;
 	}
@@ -45,13 +40,7 @@ public class Quote {
 		this.id = id;
 	}
 
-	public Vehicle getVehicle() {
-		return vehicle;
-	}
-
-	public void setVehicle(Vehicle vehicle) {
-		this.vehicle = vehicle;
-	}
+	
 
 	public Customer getCustomer() {
 		return customer;
@@ -68,10 +57,16 @@ public class Quote {
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+
+	public ProductCatalog getCatalog() {
+		return catalog;
+	}
+
+	public void setCatalog(ProductCatalog catalog) {
+		this.catalog = catalog;
+	}
+
 	
-	
-	
-	
-	
+
 
 }
