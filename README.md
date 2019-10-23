@@ -26,7 +26,7 @@ ResponseEntity<List<CatalogDto>> response = restTemplate.exchange("http://CATALO
 1. Server side load balancing is distributing the incoming requests towards multiple instances of the service.
 2. Client side load balancing is distributing the outgoing request from the client itself.
 
--Spring RestTemplate can be used for client side load balancing.
+- Spring RestTemplate can be used for client side load balancing.
 
 
 Spring Netflix Eureka has a built-in client side load balancer called Ribbon.
