@@ -30,8 +30,8 @@ ResponseEntity<List<CatalogDto>> response = restTemplate.exchange("http://CATALO
 
 
 Spring Netflix Eureka has a built-in client side load balancer called Ribbon.
-Ribbon can automatically be configured by registering RestTemplate as a bean and annotating it with @LoadBalanced.
-@LoadBalanced  - when added to rest template, we can access a service by its name, otherwise the hostname and port is required to call the service.
+* Ribbon can automatically be configured by registering RestTemplate as a bean and annotating it with **@LoadBalanced**.
+* **@LoadBalanced**  - when added to rest template, we can access a service by its name, otherwise the hostname and port is required to call the service.
 
 
 
