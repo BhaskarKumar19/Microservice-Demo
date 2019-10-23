@@ -27,11 +27,9 @@ ResponseEntity<List<CatalogDto>> response = restTemplate.exchange("http://CATALO
 2. Client side load balancing is distributing the outgoing request from the client itself.
 
 - Spring RestTemplate can be used for client side load balancing.
-
-
-Spring Netflix Eureka has a built-in client side load balancer called Ribbon.
-* Ribbon can automatically be configured by registering RestTemplate as a bean and annotating it with **@LoadBalanced**.
-* **@LoadBalanced**  - when added to rest template, we can access a service by its name, otherwise the hostname and port is required to call the service.
+- Spring Netflix Eureka has a built-in client side load balancer called Ribbon.
+- Ribbon can automatically be configured by registering RestTemplate as a bean and annotating it with **@LoadBalanced**.
+- **@LoadBalanced**  - when added to rest template, we can access a service by its name, otherwise the hostname and port is required to call the service.
 
 
 
