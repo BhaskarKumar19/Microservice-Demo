@@ -1,5 +1,6 @@
 package com.hmsi.mdhonda.quoteService.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import com.hmsi.mdhonda.quoteService.dto.QuoteDto;
 import com.hmsi.mdhonda.quoteService.entities.Quote;
 import com.hmsi.mdhonda.quoteService.mapper.QuoteMapper;
 import com.hmsi.mdhonda.quoteService.repo.QuoteRepository;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 
 @Service
 public class QuoteService {
@@ -30,22 +32,21 @@ public class QuoteService {
 		return quoteMapper.quoteEntityToDto(quoteList);
 	}
 
+	@HystrixCommand(fallbackMethod = "addQuotesFallback")
 	public List<QuoteDto> addQuotes(List<QuoteDto> quotes) {
 		List<Quote> quoteEntitys = quoteMapper.quoteDtoToEntity(quotes);
-		
 		// simulate inter-microservice call to validate if catalog id is valid
 		// make call to catalog-service
-		
 		ResponseEntity<List<CatalogDto>> response = restTemplate.exchange("http://CATALOG-SERVICE/catalog-api/catalogs",HttpMethod.GET,
 				  null,
 				  new ParameterizedTypeReference<List<CatalogDto>>(){});
 		
 		List<CatalogDto> Catalogs = response.getBody();
-		
-		
 		quoteRepository.saveAll(quoteEntitys);
 		return getAllQuotes();
 	}
 	
-	
+	public List<QuoteDto> addQuotesFallback(List<QuoteDto> quotes){
+		return  new ArrayList();
+	}
 }
