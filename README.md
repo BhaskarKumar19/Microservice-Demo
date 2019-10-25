@@ -37,3 +37,59 @@ ResponseEntity<List<CatalogDto>> response = restTemplate.exchange(
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
+# Using hystrix as circuit breaker
+
+
+- dependency required for spring-boot 2.1.4.RELEASE
+
+```
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+		</dependency>
+
+Added following dependency for dashboard(optional):
+		
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
+			<version>1.1.5.RELEASE</version>
+		</dependency>
+```
+- annotate application class with following to enable circuit-breaker:
+
+```
+@EnableCircuitBreaker
+@EnableHystrixDashboard
+public class QuoteServiceApplication
+```
+
+- annotate service method to configure fallback method:
+
+```
+@HystrixCommand(fallbackMethod = "addQuotesFallback")
+	public List<QuoteDto> addQuotes(List<QuoteDto> quotes) {
+```
+
+- define a fallback method with same signature.
+
+```
+public List<QuoteDto> addQuotesFallback(List<QuoteDto> quotes){
+		return  new ArrayList();
+	}
+```
+
+
+## configuring circuit breaker properties:
+
+```
+# In this window if a certain percent of failures(say 50%) happen for a threshold of 
+# requests(say 20 in 10 seconds) then the circuit is broken
+hystrix.command.default.metrics.rollingStats.timeInMilliseconds=10000
+hystrix.command.default.circuitBreaker.requestVolumeThreshold=20
+hystrix.command.default.circuitBreaker.errorThresholdPercentage=60
+
+# Once a circuit is broken, it stays that way for a time set the following way, 5 seconds in this instance:
+hystrix.command.default.circuitBreaker.sleepWindowInMilliseconds=5000
+
+```
