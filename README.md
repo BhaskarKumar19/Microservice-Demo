@@ -1,6 +1,6 @@
 # Using hystrix circuit breaker with rest-template
 
-1. Demonstrate rest-template with client slide load balancing
+- **Demonstrate rest-template with client slide load balancing**
 
 We are using rest-template for inter-microservice call. Quote service is calling catalog-service while adding quotes. 
 
@@ -39,7 +39,7 @@ ResponseEntity<List<CatalogDto>> response = restTemplate.exchange(
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-2. Using hystrix as circuit breaker
+- **Using hystrix as circuit breaker**
 
 
 - dependency required for spring-boot 2.1.4.RELEASE
