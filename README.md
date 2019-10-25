@@ -1,4 +1,6 @@
-# Demonstrate rest-template with client slide load balancing
+# Using hystrix circuit breaker with rest-template
+
+1. Demonstrate rest-template with client slide load balancing
 
 We are using rest-template for inter-microservice call. Quote service is calling catalog-service while adding quotes. 
 
@@ -23,7 +25,7 @@ ResponseEntity<List<CatalogDto>> response = restTemplate.exchange(
 
 ```
 
-## Client side vs server side load balancing:
+### Client side vs server side load balancing:
 1. Server side load balancing is distributing the incoming requests towards multiple instances of the service.
 2. Client side load balancing is distributing the outgoing request from the client itself.
 
@@ -37,7 +39,7 @@ ResponseEntity<List<CatalogDto>> response = restTemplate.exchange(
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-# Using hystrix as circuit breaker
+2. Using hystrix as circuit breaker
 
 
 - dependency required for spring-boot 2.1.4.RELEASE
@@ -80,7 +82,7 @@ public List<QuoteDto> addQuotesFallback(List<QuoteDto> quotes){
 ```
 
 
-## configuring circuit breaker properties:
+### configuring circuit breaker properties:
 
 ```
 # In this window if a certain percent of failures(say 50%) happen for a threshold of 
