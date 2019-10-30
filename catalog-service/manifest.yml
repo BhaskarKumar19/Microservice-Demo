@@ -7,7 +7,7 @@ applications:
   buildpack: java_buildpack
   
   env:
-      SPRING_PROFILES_ACTIVE: pcfh2
+      SPRING_PROFILES_ACTIVE: h2
       
   services:  - mysql-instance
 
