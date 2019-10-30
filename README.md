@@ -1,37 +1,16 @@
-# Demonstrate rest-template with client slide load balancing
+# Demonstrating mysql service bind on PCF
 
-We are using rest-template for inter-microservice call. Quote service is calling catalog-service while adding quotes. 
+## catalog-service app is configured to run on local as well as on pcf and attach to a db without any code change.
 
-Inject the bean in QuoteServiceApplication
 
-```
-@Bean
-@LoadBalanced
-RestTemplate restTemplate() {
-	return new RestTemplate();
-}
-```
+- when app is run without any profile on local, it will connect to local mysql db.
+- when app is pushed to pcf it will use **h2** if any db instance is not bound. **SPRING_PROFILES_ACTIVE** is set to **h2** in manifest file.
+- when app is pushed to pcf it will use db instace if any db instance is bound.
 
-Calling service using rest-template.
-
-```
-ResponseEntity<List<CatalogDto>> response = restTemplate.exchange(
-				  "http://CATALOG-SERVICE/catalog-api/catalogs",
-				  HttpMethod.GET,
-				  null,
-				  new ParameterizedTypeReference<List<CatalogDto>>(){});
-
-```
-
-## Client side vs server side load balancing:
-1. Server side load balancing is distributing the incoming requests towards multiple instances of the service.
-2. Client side load balancing is distributing the outgoing request from the client itself.
-
-- Spring RestTemplate can be used for client side load balancing.
-- Spring Netflix Eureka has a built-in client side load balancer called Ribbon.
-- Ribbon can automatically be configured by registering RestTemplate as a bean and annotating it with **@LoadBalanced**.
-- **@LoadBalanced**  - when added to rest template, we can access a service by its name, otherwise the hostname and port is required to call the service.
-
+## command to create db instace on pcf:
+- cf marketplace  [ To locate all services available ]
+- cf marketplace -s cleardb  [ to know the plan to use ]
+- cf create-service cleardb spark mysql-instance  [ creates an instace with name mysql-instance ]
 
 
 
