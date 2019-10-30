@@ -1,6 +1,6 @@
 # Demonstrating mysql service bind on PCF
 
-Application is configured to run on local as well as on pcf and attach to a db without any code change.
+## Application is configured to run on local as well as on pcf and attach to a db without any code change.
 
 
 - when app is run without any profile on local, it will connect to local mysql db.
