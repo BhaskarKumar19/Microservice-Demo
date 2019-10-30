@@ -1,0 +1,13 @@
+---
+applications:
+- name: catalog-service
+  path: target/catalog-service-0.0.1-SNAPSHOT.jar
+  host: eitan-catalog-service
+  memory: 968M
+  buildpack: java_buildpack
+  
+  env:
+      SPRING_PROFILES_ACTIVE: pcfh2
+      
+  services:  - mysql-instance
+
